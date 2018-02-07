@@ -1,28 +1,25 @@
-package CommonMethods;
+package lib;
 
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import PageObjects.QaWorks;
+
+import pageObjects.ContactUsPage;
 
 /* Navigating to a URL.
 @author Srini*/
 
 public class BrowserFunctions {	 
 	private static WebDriver driver;
+	// setting up chrome browser and navigating to the url.
 	public static void navigateUrl(String url){
-		// Setting up chrome driver.
 		System.setProperty("webdriver.chrome.driver", "/home/ajay/Srini/libraryFIlesSelenium/Srini/ChromeDriver/chromedriver");
-		//invoking chrome and navigating to the URL.
 		driver = new ChromeDriver();
-		// Navigating to qaworks website.
 		driver.get(url);
-		// Waiting for all the WebElements to be displayed.
 		driver.manage().timeouts().implicitlyWait(500,TimeUnit.SECONDS);
-		//Initializing web objects.
-		PageFactory.initElements(driver, QaWorks.class);
+		PageFactory.initElements(driver, ContactUsPage.class);
 	}
 	// method to close the browser
 	public static void closeBrowser(){
@@ -33,7 +30,6 @@ public class BrowserFunctions {
 	public static void refreshBrowser(){
 		System.out.println("Refresing the browser...");
 		driver.navigate().refresh();
-		// Waiting for all the WebElements to be displayed.
 		driver.manage().timeouts().implicitlyWait(500,TimeUnit.SECONDS);
 	}
 }

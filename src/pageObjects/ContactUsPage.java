@@ -1,14 +1,14 @@
-package PageObjects;
+package pageObjects;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/* Page Objects for COntact us webpage.
+/* Page Objects for Contact us webpage.
 @author Srini*/
 
-public class QaWorks {
+public class ContactUsPage {
 	@FindBy (xpath = "//li[@role='menuitem']")
 	private static WebElement menuItemList;
 	
@@ -33,7 +33,7 @@ public class QaWorks {
 	@FindBy(xpath = "//*[@class = 'wpcf7-form-control-wrap your-message']")
 	private static WebElement messageAlert;
 	
-	@FindBy (xpath = "//div[@class='wpcf7-response-output wpcf7-display-none wpcf7-mail-sent-ok fusion-alert'][@role='alert']")
+	@FindBy (xpath = "//div[@class='wpcf7-response-output wpcf7-display-none wpcf7-mail-sent-ng fusion-alert'][@role='alert']")
 	private static WebElement messageSent;
 	
 	@FindBy (xpath = "//div[@class='wpcf7-response-output wpcf7-display-none wpcf7-validation-errors fusion-alert'][@role='alert']")
@@ -77,18 +77,17 @@ public class QaWorks {
 	}
 	
 	// to verify if the correct message is displayed after clicking saved button.
-		public static boolean isSentSuccessfullyMessagePresent(){
-			String expectedMessage = "THANK YOU FOR YOUR MESSAGE.";
-			String actualMessage;
+		public static boolean isSentSuccessfullyMessagePresent() throws Exception{
+			//String expectedMessage = "THANK YOU FOR YOUR MESSAGE.";
+			//String actualMessage ="check message";
 			try{
-				actualMessage = (messageSent.getText().substring(2));
+				if (messageSent.isDisplayed()){
+					return false;
+				}
 			}catch (Exception e){
-				return false;
-			}
-			if (actualMessage.equals(expectedMessage)){
 				return true;
 			}
-			return false;
+			return true;
 		}
 	
 	//Validate the resubmit message in Contact Us page.	
@@ -138,4 +137,60 @@ public class QaWorks {
 				System.out.println("Message field is not validated, Fail.");
 			}
 		}
+		
+		//Validate the name and message fields in Contact Us page.	
+				public static void validateNameAndMessageField(){
+					try{
+							TimeUnit.SECONDS.sleep(1);
+							if (nameAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed() && 
+							messageAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed())
+							{
+								System.out.println("Name and message fields are validated, Pass.");
+							}
+					}catch (Exception e){
+						System.out.println("Name and message fields are not validated, Fail.");
+					}
+				}
+				//Validate the name and message fields in Contact Us page.	
+				public static void validateNameAndMessageAnEmailField(){
+					try{
+							TimeUnit.SECONDS.sleep(1);
+							if (nameAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed() && 
+							emailAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed() &&
+							messageAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed())
+							{
+								System.out.println("Name and message and email fields are validated, Pass.");
+							}
+					}catch (Exception e){
+						System.out.println("Name and message and email fields are not validated, Fail.");
+					}
+				}
+				
+				//Validate the name and email fields in Contact Us page.	
+				public static void validateNameAndEmailField(){
+					try{
+							TimeUnit.SECONDS.sleep(1);
+							if (nameAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed() && 
+							emailAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed())
+							{
+								System.out.println("Name and email fields are validated, Pass.");
+							}
+					}catch (Exception e){
+						System.out.println("Name and email fields are not validated, Fail.");
+					}
+				}
+				
+				//Validate the email and message fields in Contact Us page.	
+				public static void validateEmailAndMessageField(){
+					try{
+							TimeUnit.SECONDS.sleep(1);
+							if (emailAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed() && 
+							messageAlert.findElement(By.cssSelector("span[role=\"alert\"][class=\"wpcf7-not-valid-tip\"]")).isDisplayed())
+							{
+								System.out.println("Email and message fields are validated, Pass.");
+							}
+					}catch (Exception e){
+						System.out.println("Email and message fields are not validated, Fail.");
+					}
+				}
 }

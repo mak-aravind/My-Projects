@@ -1,4 +1,4 @@
-package TestRunner;		
+package core;		
 
 import org.junit.runner.RunWith;		
 import cucumber.api.CucumberOptions;		
@@ -8,8 +8,8 @@ import cucumber.api.junit.Cucumber;
 @author Srini*/
 
 @RunWith(Cucumber.class)				
-@CucumberOptions(features="Features",glue={"ContactUsPage"})						
-public class Runner 				
+@CucumberOptions(features="features",glue={"test"})						
+public class TestRunner 				
 {		
 
 }
